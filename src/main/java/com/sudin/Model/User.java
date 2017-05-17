@@ -3,6 +3,7 @@ package com.sudin.Model;
 /**
  * Created by Sudin Ranjitkar on 5/17/2017.
  */
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;

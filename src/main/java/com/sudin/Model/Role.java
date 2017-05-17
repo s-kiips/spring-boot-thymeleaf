@@ -3,6 +3,7 @@ package com.sudin.Model;
 /**
  * Created by Sudin Ranjitkar on 5/17/2017.
  */
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,20 +16,23 @@ import javax.persistence.Table;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="role_id")
+    @Column(name = "role_id")
     private int id;
-    @Column(name="role")
+    @Column(name = "role")
     private String role;
 
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getRole() {
         return role;
     }
+
     public void setRole(String role) {
         this.role = role;
     }

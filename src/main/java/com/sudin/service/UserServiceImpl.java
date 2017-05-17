@@ -8,6 +8,7 @@ import com.sudin.Model.User;
 import com.sudin.Repository.RoleRepository;
 import com.sudin.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,10 @@ import org.springframework.stereotype.Service;
 @Service("userService")
 public class UserServiceImpl implements UserService{
 
+	@Qualifier("userRepository")
 	@Autowired
 	private UserRepository userRepository;
+	@Qualifier("roleRepository")
 	@Autowired
     private RoleRepository roleRepository;
     @Autowired
@@ -33,7 +36,7 @@ public class UserServiceImpl implements UserService{
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setActive(1);
         Role userRole = roleRepository.findByRole("ADMIN");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
 		userRepository.save(user);
 	}
 
