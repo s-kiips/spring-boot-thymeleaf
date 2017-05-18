@@ -5,18 +5,23 @@ package com.sudin.Controller;
  */
 import javax.validation.Valid;
 
+import com.sudin.Model.Post;
 import com.sudin.Model.User;
 
+import com.sudin.service.PostService;
 import com.sudin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -24,6 +29,9 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PostService postService;
 
     @RequestMapping(value={"/", "/login"}, method = RequestMethod.GET)
     public ModelAndView login(){
@@ -72,6 +80,20 @@ public class LoginController {
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
         modelAndView.setViewName("admin/home");
         return modelAndView;
+    }
+
+
+
+    @RequestMapping(value = "admin/index",method = RequestMethod.GET)
+    public String index(Model model) {
+        List<Post> latest5Posts = postService.findLatest5();
+        model.addAttribute("latest5posts", latest5Posts);
+
+        List<Post> latest3Posts = latest5Posts.stream()
+                .limit(3).collect(Collectors.toList());
+        model.addAttribute("latest3posts", latest3Posts);
+
+        return "index";
     }
 
 
