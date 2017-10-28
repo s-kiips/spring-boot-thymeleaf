@@ -12,7 +12,6 @@ target/
 ### IntelliJ IDEA ###
 *.idea
 *.iws
-*.iml
 *.ipr
 
 ### NetBeans ###
@@ -22,6 +21,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-*.mvn
+.mvn/
 mvnw.cmd
 .gitignore
