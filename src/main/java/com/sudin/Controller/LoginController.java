@@ -5,7 +5,7 @@ package com.sudin.Controller;
  */
 import javax.validation.Valid;
 
-import com.sudin.Model.User;
+import com.sudin.Model.Users;
 
 import com.sudin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,27 +36,27 @@ public class LoginController {
     @RequestMapping(value="/registration", method = RequestMethod.GET)
     public ModelAndView registration(){
         ModelAndView modelAndView = new ModelAndView();
-        User user = new User();
-        modelAndView.addObject("user", user);
+        Users users = new Users();
+        modelAndView.addObject("user", users);
         modelAndView.setViewName("registration");
         return modelAndView;
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    public ModelAndView createNewUser(@Valid Users users, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        User userExists = userService.findUserByEmail(user.getEmail());
-        if (userExists != null) {
+        Users usersExists = userService.findUserByEmail(users.getEmail());
+        if (usersExists != null) {
             bindingResult
-                    .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
+                    .rejectValue("email", "error.users",
+                            "There is already a users registered with the email provided");
         }
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("registration");
         } else {
-            userService.saveUser(user);
-            modelAndView.addObject("successMessage", "User has been registered successfully");
-            modelAndView.addObject("user", new User());
+            userService.saveUser(users);
+            modelAndView.addObject("successMessage", "Users has been registered successfully");
+            modelAndView.addObject("user", new Users());
             modelAndView.setViewName("registration");
 
         }
@@ -67,8 +67,8 @@ public class LoginController {
     public ModelAndView home(){
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        modelAndView.addObject("userName", "Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
+        Users users = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("userName", "Welcome " + users.getName() + " " + users.getLastName() + " (" + users.getEmail() + ")");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
         modelAndView.setViewName("admin/home");
         return modelAndView;

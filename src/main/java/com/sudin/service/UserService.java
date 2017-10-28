@@ -1,9 +1,11 @@
 package com.sudin.service;
 
 
-import com.sudin.Model.User;
+import com.sudin.Model.Users;
 
 public interface UserService {
-	public User findUserByEmail(String email);
-	public void saveUser(User user);
+
+    Users findUserByEmail(String email);
+
+    void saveUser(Users users);
 }
