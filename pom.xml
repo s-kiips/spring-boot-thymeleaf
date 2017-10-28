@@ -65,11 +65,11 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/net.sourceforge.nekohtml/nekohtml -->
-        <dependency>
-            <groupId>net.sourceforge.nekohtml</groupId>
-            <artifactId>nekohtml</artifactId>
-            <version>1.9.21</version><!--$NO-MVN-MAN-VER$-->
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>net.sourceforge.nekohtml</groupId>-->
+            <!--<artifactId>nekohtml</artifactId>-->
+            <!--<version>1.9.21</version>&lt;!&ndash;$NO-MVN-MAN-VER$&ndash;&gt;-->
+        <!--</dependency>-->
 
 
     </dependencies>
